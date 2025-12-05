@@ -1,3 +1,9 @@
+tenstorrent-tools (1.4.4) UNRELEASED; urgency=medium
+  * Refactor GitHub Actions to extract version once and share between RPM and DEB builds
+  * Update DEB build to properly use version from git tag
+
+ -- Scott Christian <scott.christian@oxmiq.ai>  Thu, 05 Dec 2025 00:00:00 +0000
+
 tenstorrent-tools (1.4.0) UNRELEASED; urgency=medium
   * tt-system-tools: Automatically start services on install
 

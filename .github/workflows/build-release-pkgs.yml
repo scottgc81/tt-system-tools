@@ -49,17 +49,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt update
-      - run: sudo apt install -y git-buildpackage debhelper build-essential devscripts
+      - run: sudo apt install -y git-buildpackage debhelper build-essential
       - uses: actions/checkout@v4
         with:
           fetch-tags: true
           fetch-depth: 0
-      - name: Add new changelog entry
+      - name: Update debian changelog version
         run: |
           version="${{ needs.get-version.outputs.version }}"
-          export DEBFULLNAME="GitHub Actions"
-          export DEBEMAIL="actions@github.com"
-          dch --newversion "${version}" --distribution "UNRELEASED" "Release version ${version}"
+          sed -i "1s/(.*)/($version)/" debian/changelog
       - name: Build DEB package
         run: gbp buildpackage --git-ignore-branch --git-upstream-tag='v%(version)s' --git-export-dir="${HOME}"
       - name: Upload DEB artifact
